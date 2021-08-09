@@ -1,0 +1,16 @@
+﻿@model ParticipantModel
+
+<h2>Athletes</h2>
+
+<ul>
+    @foreach (var athlete in @Model)
+    {
+    <li>
+        Id: @athlete.Id
+        Name: @athlete.Name
+        Surname: @athlete.Surname
+        Country: @athlete.Country_Id
+    </li>
+
+    }
+</ul>

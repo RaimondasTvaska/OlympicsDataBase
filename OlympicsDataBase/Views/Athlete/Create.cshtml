@@ -1,0 +1,17 @@
+﻿@model ParticipantModel
+
+<h2>Add Country</h2>
+
+@using (Html.BeginForm("Create", "Athlete", FormMethod.Post))
+{
+    <div class="container-full" style="background-color:aliceblue">
+        <div class="container">
+            @Html.LabelFor(x => x.Name)
+            @Html.TextBoxFor(x => x.Name)
+
+            @Html.LabelFor(x => x.Surname)
+            @Html.TextBoxFor(x => x.Surname)
+            <input type="submit" value="Submit" />
+        </div>
+    </div>
+}
