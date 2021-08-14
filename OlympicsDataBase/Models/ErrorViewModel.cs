@@ -1,6 +1,6 @@
 using System;
 
-namespace OlympicsDataBase.Models
+namespace Olympics.Models
 {
     public class ErrorViewModel
     {

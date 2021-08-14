@@ -1,16 +1,22 @@
-﻿@model ParticipantModel
+﻿@model ParticipantsModel
 
-<h2>Add Country</h2>
+<h2>Naujas Atletas</h2>
 
 @using (Html.BeginForm("Create", "Athlete", FormMethod.Post))
 {
     <div class="container-full" style="background-color:aliceblue">
         <div class="container">
-            @Html.LabelFor(x => x.Name)
-            @Html.TextBoxFor(x => x.Name)
+            @Html.LabelFor(x => x.AthleteCreateInformation.Name)
+            @Html.TextBoxFor(x => x.AthleteCreateInformation.Name)
 
-            @Html.LabelFor(x => x.Surname)
-            @Html.TextBoxFor(x => x.Surname)
+            @Html.LabelFor(x => x.AthleteCreateInformation.Surname)
+            @Html.TextBoxFor(x => x.AthleteCreateInformation.Surname)
+
+            @Html.DropDownListFor(x => x.AthleteCreateInformation.Country_Id, new SelectList(Model.Countries, "Id", "CountryName"))
+
+            @Html.DropDownListFor(x => x.SportInformation.Id, new SelectList(Model.Sports, "Id", "SportName"))
+
+
             <input type="submit" value="Submit" />
         </div>
     </div>

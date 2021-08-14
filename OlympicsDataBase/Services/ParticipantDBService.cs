@@ -1,5 +1,4 @@
 ﻿using Olympics.Models;
-using OlympicsDataBase.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -21,30 +20,30 @@ namespace Olympics.Services
             _countryDB = countryDB;
             _sportDB = sportDB;
         }
-        public ParticipantModel All()
+        public ParticipantsModel AllParticipants()
         {
-            
-            ParticipantModel participants = new ParticipantModel()
+
+            ParticipantsModel participants = new ParticipantsModel()
 
             {
-                athletes = _athleteDB.AllAthletes(),
-                countries = _countryDB.AllCountries(),
-                sports = _sportDB.AllSports()
+                Athletes = _athleteDB.AllAthletes(),
+                Countries = _countryDB.AllCountries(),
+                Sports = _sportDB.AllSports()
             };
 
             return participants;
         }
-        public ParticipantModel NewAthlete()
+        public ParticipantsModel NewAthlete()
         {
             List<AthleteModel> athletesList = new();
             athletesList.Add(new AthleteModel ());
 
-            ParticipantModel participants = new ParticipantModel()
+            ParticipantsModel participants = new ParticipantsModel()
 
             {
-                athletes = athletesList,
-                countries = _countryDB.AllCountries(),
-                sports = _sportDB.AllSports()
+                Athletes = athletesList,
+                Countries = _countryDB.AllCountries(),
+                Sports = _sportDB.AllSports()
             };
 
             return participants;

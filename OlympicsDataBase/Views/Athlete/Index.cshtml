@@ -1,16 +1,69 @@
-﻿@model ParticipantModel
+﻿@model ParticipantsModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Athletes</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AthleteCreateInformation.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AthleteCreateInformation.Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AthleteCreateInformation.CountryName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var participants in @Model.Athletes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => participants.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => participants.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => participants.CountryName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+
+@*@model ParticipantsModel
 
 <h2>Athletes</h2>
 
 <ul>
-    @foreach (var athlete in @Model)
+    @foreach (var participants in @Model.Athletes)
     {
-    <li>
-        Id: @athlete.Id
-        Name: @athlete.Name
-        Surname: @athlete.Surname
-        Country: @athlete.Country_Id
-    </li>
+        <li>
+            Name: @participants.Name
+            Surname: @participants.Surname
+            CountryId: @participants.Country_Id
+        </li>
 
     }
-</ul>
+</ul>*@

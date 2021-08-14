@@ -1,4 +1,4 @@
-﻿using OlympicsDataBase.Models;
+﻿using Olympics.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -18,6 +18,7 @@ namespace Olympics.Services
         }
         public CountryModel GetCountryById()
         {
+            List<CountryModel> countries = new List<CountryModel>();
             _connection.Open();
             using var command = new SqlCommand("SELECT * FROM dbo.Countries where;", _connection);
             using var reader = command.ExecuteReader();
@@ -26,14 +27,14 @@ namespace Olympics.Services
                 countries.Add(new CountryModel()
                 {
                     Id = reader.GetInt32(0),
-                    Name = reader.GetString(1),
+                    CountryName = reader.GetString(1),
                     ISO3 = reader.GetString(2)
 
                 });
             }
             _connection.Close();
 
-            return countries;
+            return countries[0];
 
         }
 
@@ -49,7 +50,7 @@ namespace Olympics.Services
                 countries.Add(new CountryModel()
                 {
                     Id = reader.GetInt32(0),
-                    Name = reader.GetString(1),
+                    CountryName = reader.GetString(1),
                     ISO3 = reader.GetString(2)
                     
                 });
@@ -62,8 +63,8 @@ namespace Olympics.Services
         {
             _connection.Open();
 
-            string insertText = $"insert into dbo.Countries (Name, ISO3) " +
-                $"values('{country.Name}', '{country.ISO3}') ";
+            string insertText = $"insert into dbo.Countries (CountryName, ISO3) " +
+                $"values('{country.CountryName}', '{country.ISO3}') ";
 
             SqlCommand command = new SqlCommand(insertText, _connection);
             command.ExecuteNonQuery();

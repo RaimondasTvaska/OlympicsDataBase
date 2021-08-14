@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Olympics.Models;
 using Olympics.Services;
-using OlympicsDataBase.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

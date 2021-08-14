@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OlympicsDataBase.Models.CountryModel>
+﻿@model IEnumerable<CountryModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.CountryName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ISO3)
@@ -31,7 +31,7 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.CountryName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ISO3)

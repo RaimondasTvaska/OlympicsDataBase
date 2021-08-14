@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Olympics.Models;
 using Olympics.Services;
-using OlympicsDataBase.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +13,21 @@ namespace Olympics.Controllers
     {
         // GET: AthleteController
         private AthleteDBService _athlete;
-        public AthleteController (AthleteDBService athletes)
+        private CountryDBService _countryDBService;
+        private ParticipantDBService _participantsDBService;
+        private SportDBService _sportDBService;
+
+        public AthleteController(AthleteDBService athlete, CountryDBService countryDBService, ParticipantDBService participantsDBService, SportDBService sportDBService)
         {
-            _athlete = athletes;
+            _athlete = athlete;
+            _countryDBService = countryDBService;
+            _participantsDBService = participantsDBService;
+            _sportDBService = sportDBService;
         }
+
         public IActionResult Index()
         {
-            return View(_athlete.All());
+            return View(_participantsDBService.AllParticipants());
         }
         // GET: AthleteController/Details/5
         public ActionResult Details(int id)
@@ -31,19 +38,21 @@ namespace Olympics.Controllers
         // GET: AthleteController/Create
         public IActionResult Create()
         {
-            ParticipantModel newAthlete = new();
+            ParticipantsModel participants = new()
             {
-                athletes = new List<AthleteModel>() { new AthleteModel()}
-            }
-            return View(newAthlete);
+                Countries = _countryDBService.AllCountries(),
+                Sports = _sportDBService.AllSports()
+
+            };
+            return View(participants);
         }
 
         // POST: AthleteController/Create
         [HttpPost]
         
-        public IActionResult Create(List<AthleteModel> athletes)
+        public IActionResult Create(ParticipantsModel participants)
         {
-            _athlete.AddNewAthlete(athletes);
+            _athlete.AddNewAthlete(participants);
 
             return RedirectToAction("Index");
 
