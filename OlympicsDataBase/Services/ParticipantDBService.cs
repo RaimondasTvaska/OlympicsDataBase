@@ -44,6 +44,7 @@ namespace Olympics.Services
                 Athletes = athletesList,
                 Countries = _countryDB.AllCountries(),
                 Sports = _sportDB.AllSports()
+
             };
 
             return participants;

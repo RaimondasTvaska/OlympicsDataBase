@@ -29,7 +29,7 @@ namespace Olympics.Services
                 sports.Add(new SportModel()
                 {
                     Id = reader.GetInt32(0),
-                    Name = reader.GetString(1),
+                    SportName = reader.GetString(1),
                     TeamActivity = reader.GetBoolean(2)
 
                 });
@@ -42,8 +42,8 @@ namespace Olympics.Services
         {
             _connection.Open();
 
-            string insertText = $"insert into dbo.Sports (Name, TeamActivity) " +
-                $"values('{sport.Name}', '{sport.TeamActivity}') ";
+            string insertText = $"insert into dbo.Sports (SportName, TeamActivity) " +
+                $"values('{sport.SportName}', '{sport.TeamActivity}') ";
 
             SqlCommand command = new SqlCommand(insertText, _connection);
             command.ExecuteNonQuery();

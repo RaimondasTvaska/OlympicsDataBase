@@ -8,7 +8,7 @@ namespace Olympics.Models
     public class SportModel
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string SportName { get; set; }
         public bool TeamActivity { get; set; }
     }
 }

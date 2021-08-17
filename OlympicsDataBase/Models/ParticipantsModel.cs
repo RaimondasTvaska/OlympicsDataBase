@@ -12,6 +12,7 @@ namespace Olympics.Models
         public List<SportModel> Sports { get; set; }
         public AthleteModel AthleteCreateInformation { get; set; }
         public CountryModel CountryInformation { get; set; }
-        public SportModel SportInformation { get; set; }
+        public List<int> SportInformation { get; set; }
+        public SortFilterModel SortFilter { get; set; }
     }
 }

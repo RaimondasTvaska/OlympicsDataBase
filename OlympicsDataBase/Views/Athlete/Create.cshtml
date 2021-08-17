@@ -14,7 +14,7 @@
 
             @Html.DropDownListFor(x => x.AthleteCreateInformation.Country_Id, new SelectList(Model.Countries, "Id", "CountryName"))
 
-            @Html.DropDownListFor(x => x.SportInformation.Id, new SelectList(Model.Sports, "Id", "SportName"))
+            @Html.DropDownListFor(x => x.SportInformation, new MultiSelectList(Model.Sports, "Id", "SportName"), new { multiple = "multiple", @class = "form-control" })
 
 
             <input type="submit" value="Submit" />

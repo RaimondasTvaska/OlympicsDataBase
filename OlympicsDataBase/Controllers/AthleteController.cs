@@ -25,7 +25,7 @@ namespace Olympics.Controllers
             _sportDBService = sportDBService;
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View(_participantsDBService.AllParticipants());
         }
@@ -34,9 +34,24 @@ namespace Olympics.Controllers
         {
             return View();
         }
+        public IActionResult FilteredSport(ParticipantsModel model)
+        {
+            var dbModel = _participantsDBService.AllParticipants();
+
+            if (model.SortFilter.FilterSport != "")
+            {
+                dbModel.Athletes = dbModel.Athletes.Where(a => a.SportName.Contains(model.SortFilter.FilterSport)).ToList();
+            }
+            if (model.SortFilter.FilterCountry != "")
+            {
+                dbModel.Athletes = dbModel.Athletes.Where(c => c.CountryName.Contains(model.SortFilter.FilterCountry)).ToList();
+            }
+
+            return View("Index", dbModel);
+        }
 
         // GET: AthleteController/Create
-        public IActionResult Create()
+        public ActionResult Create()
         {
             ParticipantsModel participants = new()
             {
@@ -49,8 +64,8 @@ namespace Olympics.Controllers
 
         // POST: AthleteController/Create
         [HttpPost]
-        
-        public IActionResult Create(ParticipantsModel participants)
+
+        public ActionResult Create(ParticipantsModel participants)
         {
             _athlete.AddNewAthlete(participants);
 
@@ -66,7 +81,7 @@ namespace Olympics.Controllers
 
         // POST: AthleteController/Edit/5
         [HttpPost]
-        
+
         public ActionResult Edit(int id, IFormCollection collection)
         {
             try
@@ -87,7 +102,7 @@ namespace Olympics.Controllers
 
         // POST: AthleteController/Delete/5
         [HttpPost]
-        
+
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
@@ -99,5 +114,6 @@ namespace Olympics.Controllers
                 return View();
             }
         }
+
     }
 }

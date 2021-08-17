@@ -6,6 +6,21 @@
 
 <h2>Athletes</h2>
 
+@using (Html.BeginForm("FilteredSport", "Athlete", FormMethod.Post))
+{
+<div class="container-fluid">
+    @Html.LabelFor(x => x.SortFilter.FilterSport, new SelectList(Model.Sports, "Filter by Sport: "))
+    @Html.DropDownListFor(x => x.SortFilter.FilterSport, new SelectList(Model.Sports.Select(s => s.SportName)), "", new { @class = "form-control" })
+
+    @Html.LabelFor(x => x.SortFilter.FilterCountry, new SelectList(Model.Countries, "Filter by Country: "))
+    @Html.DropDownListFor(x => x.SortFilter.FilterCountry, new SelectList(Model.Countries.Select(s => s.CountryName)), "", new { @class = "form-control" })
+
+    <button type="submit" class="btn btn-outline-success mt-2 mb-md-4 text-center">Filter</button>
+
+</div>
+}
+
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -19,7 +34,14 @@
                 @Html.DisplayNameFor(model => model.AthleteCreateInformation.Surname)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AthleteCreateInformation.CountryName)
+                @Html.DisplayNameFor(model => model.AthleteCreateInformation.Country_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AthleteCreateInformation.Country_Id)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AthleteCreateInformation.SportName)
             </th>
             <th></th>
         </tr>
@@ -35,8 +57,13 @@
                     @Html.DisplayFor(modelItem => participants.Surname)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => participants.CountryName)
+                    @Html.DisplayFor(modelItem => participants.Country_Id)
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => participants.SportName)
+                </td>
+
+
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                     @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
@@ -54,16 +81,16 @@
 
 @*@model ParticipantsModel
 
-<h2>Athletes</h2>
+    <h2>Athletes</h2>
 
-<ul>
-    @foreach (var participants in @Model.Athletes)
-    {
-        <li>
-            Name: @participants.Name
-            Surname: @participants.Surname
-            CountryId: @participants.Country_Id
-        </li>
+    <ul>
+        @foreach (var participants in @Model.Athletes)
+        {
+            <li>
+                Name: @participants.Name
+                Surname: @participants.Surname
+                CountryId: @participants.Country_Id
+            </li>
 
-    }
-</ul>*@
+        }
+    </ul>*@
