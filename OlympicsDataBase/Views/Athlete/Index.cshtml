@@ -6,11 +6,12 @@
 
 <h2>Athletes</h2>
 
-@using (Html.BeginForm("FilteredSport", "Athlete", FormMethod.Post))
+@using (Html.BeginForm("FilteredIndex", "Athlete", FormMethod.Post))
 {
 <div class="container-fluid">
     @Html.LabelFor(x => x.SortFilter.FilterSport, new SelectList(Model.Sports, "Filter by Sport: "))
     @Html.DropDownListFor(x => x.SortFilter.FilterSport, new SelectList(Model.Sports.Select(s => s.SportName)), "", new { @class = "form-control" })
+
 
     @Html.LabelFor(x => x.SortFilter.FilterCountry, new SelectList(Model.Countries, "Filter by Country: "))
     @Html.DropDownListFor(x => x.SortFilter.FilterCountry, new SelectList(Model.Countries.Select(s => s.CountryName)), "", new { @class = "form-control" })
@@ -34,12 +35,9 @@
                 @Html.DisplayNameFor(model => model.AthleteCreateInformation.Surname)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AthleteCreateInformation.Country_Id)
+                @Html.DisplayNameFor(model => model.AthleteCreateInformation.CountryName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AthleteCreateInformation.Country_Id)
-            </th>
-
+           
             <th>
                 @Html.DisplayNameFor(model => model.AthleteCreateInformation.SportName)
             </th>
@@ -57,7 +55,7 @@
                     @Html.DisplayFor(modelItem => participants.Surname)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => participants.Country_Id)
+                    @Html.DisplayFor(modelItem => participants.CountryName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => participants.SportName)

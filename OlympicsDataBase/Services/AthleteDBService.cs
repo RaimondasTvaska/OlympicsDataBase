@@ -22,23 +22,25 @@ namespace Olympics.Services
             List<AthleteModel> athletes = new();
 
             _connection.Open();
-            using var command = new SqlCommand(@"select athletes.*, STRING_AGG (Sports.SportName, ',  ') 
+            using var command = new SqlCommand(@"select athletes.Name, athletes.Surname, countries.CountryName, STRING_AGG (sports.sportName, ',  ') AS 'sports'
                 from athletes 
                 join AthletesSports
                 on athletes.Id = AthletesSports.AthleteId
+                join countries
+                on athletes.country_id = countries.Id
                 join sports 
                 on AthletesSports.SportId = Sports.Id
-                group by athletes.Id, Name, Surname, Country_Id; ", _connection);
+                group by Name, Surname, CountryName; ", _connection);
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
                 athletes.Add(new AthleteModel()
                 {
-                    Id = reader.GetInt32(0),
-                    Name = reader.GetString(1),
-                    Surname = reader.GetString(2),
-                    Country_Id = reader.IsDBNull(3) ? null : reader.GetInt32(3),
-                    SportName = reader.GetString(4),
+                    //Id = reader.GetInt32(0),
+                    Name = reader.GetString(0),
+                    Surname = reader.GetString(1),
+                    CountryName = reader.GetString(2),
+                    SportName = reader.GetString(3),
                 });
             }
             _connection.Close();

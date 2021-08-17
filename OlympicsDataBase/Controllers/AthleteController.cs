@@ -34,17 +34,17 @@ namespace Olympics.Controllers
         {
             return View();
         }
-        public IActionResult FilteredSport(ParticipantsModel model)
+        public IActionResult FilteredIndex(ParticipantsModel model)
         {
             var dbModel = _participantsDBService.AllParticipants();
 
             if (model.SortFilter.FilterSport != "")
             {
-                dbModel.Athletes = dbModel.Athletes.Where(a => a.SportName.Contains(model.SortFilter.FilterSport)).ToList();
+                dbModel.Athletes = dbModel.Athletes.Where(a => a.SportName == model.SortFilter.FilterSport).ToList();
             }
             if (model.SortFilter.FilterCountry != "")
             {
-                dbModel.Athletes = dbModel.Athletes.Where(c => c.CountryName.Contains(model.SortFilter.FilterCountry)).ToList();
+                dbModel.Athletes = dbModel.Athletes.Where(c => c.CountryName == model.SortFilter.FilterCountry).ToList();
             }
 
             return View("Index", dbModel);
